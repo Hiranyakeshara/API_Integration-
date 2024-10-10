@@ -1,2 +1,78 @@
 hello
+<?php
+$url = 'https://api.domains.lk/submitprovisionalorder/';
+$apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+
+// Data to be submitted in the API call
+$data = array(
+    'SubmissionInformation' => json_encode(array(
+        'DomainNameDetails' => array(
+            'DomainName' => 'test.lk', // Replace with actual domain name
+            'CategoryID' => 1, // Replace with relevant Category ID
+            'Reason' => 'Reason for domain registration' // Replace with actual reason (Optional)
+        ),
+        'ForMyOrganization' => 'true', // 'true' or 'false'
+        'ClientOrganizationDetails' => array(
+            'Name' => 'Organization Name', // Replace with actual organization name
+            'RegistrationNumber' => '7678', // Replace with actual registration number
+            'Telephone' => '0899', // Replace with actual telephone number
+            'Address' => 'Address 343', // Replace with actual address
+            'TAXNumber' => 'testVAT', // Replace with actual TAX number
+            'Description' => 'Organization Description', // Replace if needed (Optional)
+            'Country' => 'Sri Lanka' // Replace with the country name
+        ),
+        // Optional: Only required if ForMyOrganization is false
+        'RegistrantDetails' => array(
+            'FirstName' => 'fname',
+            'LastName' => 'lname',
+            'NICPassport' => '3232',
+            'Email' => 'testemail@gmail.com',
+            'Mobile' => '9898',
+            'Address' => 'address',
+            'Country' => 'Sri Lanka',
+            'TAXNumber' => 'dsdsd' // Optional
+        ),
+        'TechnicalContactDetails' => array(
+            'FirstName' => 'fname',
+            'LastName' => 'lname',
+            'NICPassport' => '3232',
+            'Email' => 'testemail@gmail.com',
+            'Mobile' => '9898',
+            'Address' => 'address',
+            'Country' => 'Sri Lanka',
+            'TAXNumber' => 'dsdsd' // Optional
+        )
+    ))
+);
+
+// Headers for the API call
+$headers = array(
+    'x-api-key: ' . $apiKey,
+    'Content-Type: application/x-www-form-urlencoded' // Optional but recommended
+);
+
+// Initialize cURL
+$ch = curl_init($url);
+
+// Set cURL options
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+
+// Execute the API call
+$response = curl_exec($ch);
+
+// Check for errors
+if (curl_errno($ch)) {
+    echo 'cURL error: ' . curl_error($ch);
+} else {
+    // Output the response
+    echo 'Response: ' . $response;
+}
+
+// Close cURL resource
+curl_close($ch);
+?>
+
 
