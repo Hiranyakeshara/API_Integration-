@@ -1,4 +1,3 @@
-hello
 <?php
 $url = 'https://api.domains.lk/submitprovisionalorder/';
 $apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
